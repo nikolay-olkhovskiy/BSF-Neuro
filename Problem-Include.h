@@ -7,6 +7,5 @@ Supervisor: Leonid B. Sokolinsky
 This source code is a part of BSF Skeleton
 ==============================================================================*/
 
-#include <bitset>
 #include <iostream>
 #include <iomanip>
