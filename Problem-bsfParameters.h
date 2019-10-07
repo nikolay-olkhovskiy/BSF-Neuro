@@ -1,12 +1,13 @@
 /*==============================================================================
 Project: Bulk Synchronous Farm (BSF)
 Theme: BSF Skeleton
-Module: Problem-bsfParameters.h (BSF Skeleton Parameters)
+Module: Problem-bsfParameters.h (Predefined Problem Parameters)
 Prefix: PP_BSF
 Author: Nadezhda A. Ezhova
 Supervisor: Leonid B. Sokolinsky
 This source code is a part of BSF Skeleton
 ==============================================================================*/
+#pragma once
 
 //=========================== Skeleton Parameters =========================
 #define PP_BSF_PRECISION 4		// Decimal precision on output

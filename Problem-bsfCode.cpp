@@ -1,19 +1,15 @@
 /*==============================================================================
 Project: Bulk Synchronous Farm (BSF)
 Theme: BSF Skeleton
-Module: Problem-bsfCode.cpp (Implementation of the Problem)
+Module: Problem-bsfCode.cpp (Problem-dependent Code)
 Prefix: PI
 Author: Nadezhda A. Ezhova
 Supervisor: Leonid B. Sokolinsky
 This source code is a part of BSF Skeleton
 ==============================================================================*/
-
-#include "Problem-Include.h"		// Problem "Include" Files
-#include "Problem-bsfTypes.h"		// Predefined BSF Problem Types
-#include "Problem-Types.h"			// Problem Types 
-#include "Problem-Data.h"			// Problem Data 
+#include "Problem-Data.h"			// Problem Types 
 #include "Problem-Forwards.h"		// Problem Function Forwards
-#include "Problem-bsfParameters.h"	// BSF Skeleton Parameters
+#include "Problem-Include.h"		// Problem "Include" Files
 using namespace std;
 
 void PC_bsf_Init(bool* success) { // success=false if initialization is unsuccessful

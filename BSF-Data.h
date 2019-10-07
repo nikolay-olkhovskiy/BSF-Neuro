@@ -1,13 +1,14 @@
 /*==============================================================================
 Project: Bulk Synchronous Farm (BSF)
 Theme: BSF Skeleton
-Module: BSF-Data.h (BSF Data)
+Module: BSF-Data.h (Problem Independent Variables & Data Structures)
 Prefix: BD
 Author: Nadezhda A. Ezhova 
 Supervisor: Leonid B. Sokolinsky
 This source code is a part of BSF Skeleton
 ==============================================================================*/
-
+#include "BSF-Include.h"	// Problem Independent "Include" Files
+#include "BSF-Types.h"		// Problem Independent Types
 // ========================= Constants ========================
 #define BD_EXIT	true			// End of Work
 // ========================= Variables ========================

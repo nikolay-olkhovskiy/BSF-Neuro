@@ -1,11 +1,12 @@
 /*==============================================================================
 Project: Bulk Synchronous Farm (BSF)
 Theme: BSF Skeleton
-Module: BSF-ProblemFunctions.h (BSF Predefined Problem Function Forwards)
+Module: BSF-ProblemFunctions.h (Predefined Problem Function Forwards)
 Author: Nadezhda A. Ezhova
 Supervisor: Leonid B. Sokolinsky
 This source code is a part of BSF Skeleton
 ==============================================================================*/
+#include "Problem-bsfTypes.h"	// Predefined Problem Types
 
 void PC_bsf_AssignListSize(int* listSize);
 void PC_bsf_CopyData(PT_bsf_data_T* dataIn, PT_bsf_data_T* dataOut);

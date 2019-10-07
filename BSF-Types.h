@@ -1,12 +1,14 @@
 /*==============================================================================
 Project: Bulk Synchronous Farm (BSF)
 Theme: BSF Skeleton
-Module: BSF-Types.h (BSF Types)
+Module: BSF-Types.h (Problem Independent Types)
 Prefix: BT
 Author: Nadezhda A. Ezhova 
 Supervisor: Leonid B. Sokolinsky
 This source code is a part of BSF Skeleton
 ==============================================================================*/
+#pragma once
+#include "Problem-bsfTypes.h"	// Predefined BSF Problem Types
 
 //=========================== BSF Types ===============================
 struct BT_order_T {  
