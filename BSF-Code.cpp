@@ -25,7 +25,7 @@ int main(int argc, char *argv[]) {
 	MPI_Allreduce(&BD_success, &success, 1, MPI_UNSIGNED, MPI_LAND, MPI_COMM_WORLD);
 	if (!success) {
 		if (BD_rank == BD_masterRank) 
-			cout << "Error: PC_bsf_Init failed (not enough memory)!" << endl;
+			cout << "Error: PC_bsf_Init failed!" << endl;
 		MPI_Finalize();
 		exit(1);
 	};
@@ -34,7 +34,7 @@ int main(int argc, char *argv[]) {
 	BC_Init(&BD_success);
 	MPI_Allreduce(&BD_success, &success, 1, MPI_UNSIGNED, MPI_LAND, MPI_COMM_WORLD);
 	if (!success) {
-		if (BD_rank == BD_masterRank) cout << "Error: BC_Init failed (not enough memory). N = " << endl;
+		if (BD_rank == BD_masterRank) cout << "Error: BC_Init failed (not enough memory)!" << endl;
 		MPI_Finalize();
 		exit(1);
 	};
@@ -203,7 +203,7 @@ static void BC_Init(bool* success) {// Initialization
 	BD_sublistSize = (int*)malloc(BD_numOfWorkers * sizeof(int));
 	BD_offset = (int*)malloc(BD_numOfWorkers * sizeof(int));
 
-	PC_bsf_SetInitApproximation(&BD_data);
+	PC_bsf_SetInitData(&BD_data);
 
 	int offset = 0;
 	for (int rank = 0; rank < BD_numOfWorkers; rank++) {

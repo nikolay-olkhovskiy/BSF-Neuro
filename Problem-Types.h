@@ -8,5 +8,6 @@ Author: Leonid B. Sokolinsky
 This source code is a part of BSF Skeleton
 ==============================================================================*/
 #pragma once
+#include "Problem-Include.h"		// Problem "Include" Files
 #include "Problem-Parameters.h"		// Problem Parameters 
 //=========================== Problem Types =========================

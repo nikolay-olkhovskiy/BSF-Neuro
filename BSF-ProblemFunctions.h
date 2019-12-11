@@ -20,5 +20,5 @@ void PC_bsf_ProblemOutput(PT_bsf_reduceElem_T* reduceResult, int reduceCounter, 
 	int iterCounter, double t);
 void PC_bsf_ProcessResults(bool* exit, PT_bsf_reduceElem_T* reduceResult, int reduceCounter, PT_bsf_data_T* data, int iterCounter);
 void PC_bsf_ReduceF(PT_bsf_reduceElem_T* x, PT_bsf_reduceElem_T* y, PT_bsf_reduceElem_T* z);
-void PC_bsf_SetInitApproximation(PT_bsf_data_T* data);
+void PC_bsf_SetInitData(PT_bsf_data_T* data);
 void PC_bsf_SetMapSubList(PT_bsf_mapElem_T* sublist, int sublistLength, int offset, bool* success);

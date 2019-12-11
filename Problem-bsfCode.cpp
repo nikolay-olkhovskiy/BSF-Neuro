@@ -10,7 +10,6 @@ This source code is a part of BSF Skeleton
 #include "Problem-bsfParameters.h"	// Predefined Problem Parameters
 #include "Problem-Data.h"			// Problem Types 
 #include "Problem-Forwards.h"		// Problem Function Forwards
-#include "Problem-Include.h"		// Problem "Include" Files
 using namespace std;
 
 //----------------------- Predefined problem-dependent functions -----------------
@@ -72,7 +71,7 @@ void PC_bsf_ProblemOutput(PT_bsf_reduceElem_T* reduceResult, int reduceCounter, 
 
 };
 
-void PC_bsf_SetInitApproximation(PT_bsf_data_T* data) {
+void PC_bsf_SetInitData(PT_bsf_data_T* data) {
 
 };
 
