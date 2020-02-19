@@ -7,7 +7,8 @@ Author: Leonid B. Sokolinsky
 
 This source code is a part of BSF Skeleton
 ==============================================================================*/
-#include "Problem-Types.h"		// Problem Types 
+#include "Problem-Types.h"		// Problem Parameters 
 //========================== Problem variables ====================================
 
 //========================== Problem structures ====================================
+

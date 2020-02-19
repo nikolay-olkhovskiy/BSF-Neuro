@@ -9,15 +9,22 @@ This source code is a part of BSF Skeleton
 ==============================================================================*/
 #pragma once
 #include "Problem-Types.h"		// Problem Types 
+
 //=========================== BSF Types =========================
-struct PT_bsf_data_T {				// Data for workers (current approximation)
-	// Pointers are not allowed here
+struct PT_bsf_parameter_T {			// Parameter for workers
+
 };
 
 struct PT_bsf_mapElem_T {			// Element of map list
-	// Pointers are not allowed here
+
 };
 
-struct PT_bsf_reduceElem_T {		// Element of reduce list	
-	// Pointers are not allowed here
+struct PT_bsf_reduceElem_T {			// Element of reduce list	
+
+};
+struct PT_bsf_reduceElem_T_1 {				
+	// optional filling
+};
+struct PT_bsf_reduceElem_T_2 {
+	// optional filling
 };
