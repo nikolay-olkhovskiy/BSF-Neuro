@@ -3,7 +3,6 @@ Project: Bulk Synchronous Farm (BSF)
 Theme: BSF Skeleton
 Module: BSF-Forwards.h (Problem Independent Function Forwards)
 Author: Leonid B. Sokolinsky 
-
 This source code is a part of BSF Skeleton
 ==============================================================================*/
 #include "BSF-Types.h"					// Problem Independent Types 
@@ -19,6 +18,8 @@ static void BC_ProcessExtendedReduceList_1(BT_extendedReduceElem_T_1* reduceList
 	BT_extendedReduceElem_T_1** extendedReduceResult_P);
 static void BC_ProcessExtendedReduceList_2(BT_extendedReduceElem_T_2* reduceList, int index, int length,
 	BT_extendedReduceElem_T_2** extendedReduceResult_P);
+static void BC_ProcessExtendedReduceList_3(BT_extendedReduceElem_T_3* reduceList, int index, int length,
+	BT_extendedReduceElem_T_3** extendedReduceResult_P);
 static void BC_Worker();	// Worker Process
 static bool BC_WorkerMap();
 static void BC_WorkerReduce();

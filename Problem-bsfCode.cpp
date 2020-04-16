@@ -44,7 +44,13 @@ void PC_bsf_MapF_1(PT_bsf_mapElem_T* mapElem, PT_bsf_reduceElem_T_1* reduceElem,
 
 void PC_bsf_MapF_2(PT_bsf_mapElem_T* mapElem, PT_bsf_reduceElem_T_2* reduceElem,
 	int* success // 1 - reduceElem was produced successfully (default); 0 - otherwise
-) {
+	) {
+	// optional filling
+};
+
+void PC_bsf_MapF_3(PT_bsf_mapElem_T* mapElem, PT_bsf_reduceElem_T_3* reduceElem,
+	int* success // 1 - reduceElem was produced successfully (default); 0 - otherwise
+	) {
 	// optional filling
 };
 
@@ -57,6 +63,10 @@ void PC_bsf_ReduceF_1(PT_bsf_reduceElem_T_1* x, PT_bsf_reduceElem_T_1* y, PT_bsf
 };
 
 void PC_bsf_ReduceF_2(PT_bsf_reduceElem_T_2* x, PT_bsf_reduceElem_T_2* y, PT_bsf_reduceElem_T_2* z) {
+	// optional filling
+};
+
+void PC_bsf_ReduceF_3(PT_bsf_reduceElem_T_3* x, PT_bsf_reduceElem_T_3* y, PT_bsf_reduceElem_T_3* z) {
 	// optional filling
 };
 
@@ -86,7 +96,17 @@ void PC_bsf_ProcessResults_2(
 	int reduceCounter, // Number of successfully produced Elrments of Reduce List
 	PT_bsf_parameter_T* parameter, // Current Approximation
 	int* newJobCase
-) {
+	) {
+	// optional filling
+};
+
+void PC_bsf_ProcessResults_3(
+	bool* exit, // "true" if Stopping Criterion is satisfied, and "false" otherwise
+	PT_bsf_reduceElem_T_3* reduceResult,
+	int reduceCounter, // Number of successfully produced Elrments of Reduce List
+	PT_bsf_parameter_T* parameter, // Current Approximation
+	int* newJobCase
+	) {
 	// optional filling
 };
 
@@ -126,6 +146,13 @@ void PC_bsf_IterOutput_2(PT_bsf_reduceElem_T_2* reduceResult, int reduceCounter,
 
 };
 
+void PC_bsf_IterOutput_3(PT_bsf_reduceElem_T_3* reduceResult, int reduceCounter, PT_bsf_parameter_T parameter,
+	double elapsedTime, int jobCase) {
+	cout << "------------------ " << PP_BSF_iterCounter << " ------------------" << endl;
+	// optional filling
+
+};
+
 void PC_bsf_ProblemOutput(PT_bsf_reduceElem_T* reduceResult, int reduceCounter, PT_bsf_parameter_T parameter,
 	double t) {// Output Function
 
@@ -137,6 +164,11 @@ void PC_bsf_ProblemOutput_1(PT_bsf_reduceElem_T_1* reduceResult, int reduceCount
 };
 
 void PC_bsf_ProblemOutput_2(PT_bsf_reduceElem_T_2* reduceResult, int reduceCounter, PT_bsf_parameter_T parameter,
+	double t) {// Output Function
+	// optional filling
+};
+
+void PC_bsf_ProblemOutput_3(PT_bsf_reduceElem_T_3* reduceResult, int reduceCounter, PT_bsf_parameter_T parameter,
 	double t) {// Output Function
 	// optional filling
 };

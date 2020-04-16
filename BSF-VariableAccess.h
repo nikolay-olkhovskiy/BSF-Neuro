@@ -4,7 +4,6 @@ Theme: BSF Skeleton
 Module: BSF-VariableAccess.h (Access to BSF-skeleton variables)
 Prefix: BV
 Author: Leonid B. Sokolinsky
-
 This source code is a part of BSF Skeleton
 ==============================================================================*/
 

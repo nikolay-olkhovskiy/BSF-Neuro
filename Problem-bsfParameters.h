@@ -9,6 +9,7 @@ This source code is a part of BSF Skeleton
 ==============================================================================*/
 
 //=========================== Skeleton Parameters =========================
+#define PP_MAX_MPI_SIZE 500		// Maximal MPI Size
 #define PP_BSF_PRECISION 4		// Decimal precision on output
 //#define PP_BSF_ITER_OUTPUT	// If it is defined then Iteration Output is performed
 #define PP_BSF_TRACE_COUNT 1	// Each PP_BSF_TRACE_COUNT-th iteration to be outputted
