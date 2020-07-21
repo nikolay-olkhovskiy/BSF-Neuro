@@ -2,9 +2,8 @@
 Project: Bulk Synchronous Farm (BSF)
 Theme: BSF Skeleton
 Module: Problem-bsfCode.cpp (Problem-dependent Code)
-Prefix: PI
+Prefix: PC
 Author: Leonid B. Sokolinsky
-
 This source code is a part of BSF Skeleton
 ==============================================================================*/
 #include "Problem-bsfParameters.h"	// Predefined Problem Parameters

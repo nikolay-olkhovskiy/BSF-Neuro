@@ -2,7 +2,7 @@
 Project: Bulk Synchronous Farm (BSF)
 Theme: BSF Skeleton
 Module: BSF-Code.cpp (Problem Independent Code)
-Prefix: BI
+Prefix: BC
 Author: Leonid B. Sokolinsky
 This source code is a part of BSF Skeleton
 ==============================================================================*/
