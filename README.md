@@ -5,5 +5,6 @@ The theoretical basis of the BSF-skeleton is the BSF (Bulk Synchronous Farm) mod
 The repository includes User manual (https://github.com/leonid-sokolinsky/BSF-skeleton/blob/master/User-manual.pdf) that explains in detail how to quickly create correct and efficient parallel programs for computing clusters using the BSF-skeleton.
 
 References
+
 [1] L.B. Sokolinsky, BSF: a parallel computation model for scalability estimation of iterative numerical algorithms on cluster computing
 systems, Journal of Parallel and Distributed Computing, 149 (2021): pp. 193–206. https://doi.org/10.1016/j.jpdc.2020.12.009.
