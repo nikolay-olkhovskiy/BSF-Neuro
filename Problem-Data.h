@@ -2,7 +2,7 @@
 Project: Bulk Synchronous Farm (BSF)
 Theme: BSF Skeleton
 Module: Problem-Data.h (Problem Data)
-Prefix: PP
+Prefix: PD
 Author: Leonid B. Sokolinsky
 This source code is a part of BSF Skeleton (https://github.com/leonid-sokolinsky/BSF-skeleton)
 ==============================================================================*/
