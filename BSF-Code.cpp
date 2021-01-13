@@ -495,6 +495,7 @@ static void BC_MpiRun() {
 	MPI_Comm_rank(MPI_COMM_WORLD, &BD_rank);
 	PC_bsfAssignMpiRank(BD_rank);
 	MPI_Comm_size(MPI_COMM_WORLD, &BD_size);
+	PC_bsfAssignMpiMaster(BD_size - 1);
 	if (BD_size > PP_MAX_MPI_SIZE) {
 		if (BD_rank == 0) cout << "Error: MPI_SIZE exceeded the maximum allowed value PP_MAX_MPI_SIZE = " << PP_MAX_MPI_SIZE << endl;
 		MPI_Finalize();
