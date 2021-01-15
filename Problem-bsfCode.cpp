@@ -172,7 +172,7 @@ void PC_bsf_SetMapListElem(PT_bsf_mapElem_T* elem, int i) {
 void PC_bsfAssignAddressOffset(int value) { BSF_sv_addressOffset = value; }
 void PC_bsfAssignIterCounter(int value) { BSF_sv_iterCounter = value; }
 void PC_bsfAssignJobCase(int value) { BSF_sv_jobCase = value; }
-void PC_bsfAssignMpiMaster(int value) { BSF_sv_mpiMaster = value; };
+void PC_bsfAssignMpiMaster(int value) { BSF_sv_mpiMaster = value; }
 void PC_bsfAssignMpiRank(int value) { BSF_sv_mpiRank = value; }
 void PC_bsfAssignNumberInSublist(int value) { BSF_sv_numberInSublist = value; }
 void PC_bsfAssignNumOfWorkers(int value) { BSF_sv_numOfWorkers = value; }
