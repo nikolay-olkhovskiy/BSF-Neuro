@@ -27,17 +27,17 @@ static int	BD_tailLength;		// Length of the remainder of the list after dividing
 static double BD_t;				// Total time
 static int BD_iterCounter;
 // ========================= Lists ========================
-BT_extendedReduceElem_T*	BD_extendedReduceList; 
-BT_extendedReduceElem_T_1*	BD_extendedReduceList_1;
-BT_extendedReduceElem_T_2*	BD_extendedReduceList_2;
-BT_extendedReduceElem_T_3*	BD_extendedReduceList_3;
-BT_extendedReduceElem_T*	BD_extendedReduceResult_P;
-BT_extendedReduceElem_T_1*	BD_extendedReduceResult_P_1;
-BT_extendedReduceElem_T_2*	BD_extendedReduceResult_P_2;
-BT_extendedReduceElem_T_3*	BD_extendedReduceResult_P_3;
-PT_bsf_mapElem_T*			BD_mapSubList;
-BT_order_T					BD_order;		// Order for Workers
-MPI_Status					BD_status[PP_MAX_MPI_SIZE];		// MPI ststus
-MPI_Request					BD_request[PP_MAX_MPI_SIZE];	// MPI request
-int							BD_sublistSize[PP_MAX_MPI_SIZE];// SubList Sizes for Workers
-int							BD_offset[PP_MAX_MPI_SIZE];		// List offsets for Workers
+static BT_extendedReduceElem_T*		BD_extendedReduceList;
+static BT_extendedReduceElem_T_1*	BD_extendedReduceList_1;
+static BT_extendedReduceElem_T_2*	BD_extendedReduceList_2;
+static BT_extendedReduceElem_T_3*	BD_extendedReduceList_3;
+static BT_extendedReduceElem_T*		BD_extendedReduceResult_P;
+static BT_extendedReduceElem_T_1*	BD_extendedReduceResult_P_1;
+static BT_extendedReduceElem_T_2*	BD_extendedReduceResult_P_2;
+static BT_extendedReduceElem_T_3*	BD_extendedReduceResult_P_3;
+static PT_bsf_mapElem_T*			BD_mapSubList;
+static BT_order_T					BD_order;		// Order for Workers
+static MPI_Status					BD_status[PP_MAX_MPI_SIZE];		// MPI ststus
+static MPI_Request					BD_request[PP_MAX_MPI_SIZE];	// MPI request
+static int							BD_sublistSize[PP_MAX_MPI_SIZE];// SubList Sizes for Workers
+static int							BD_offset[PP_MAX_MPI_SIZE];		// List offsets for Workers
