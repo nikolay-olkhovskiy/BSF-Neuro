@@ -50,7 +50,7 @@ static void BC_Master() {// The head function of the master process.
 	PC_bsf_ParametersOutput(BD_order.parameter);
 	BD_iterCounter = 0;
 
-	BD_t -= MPI_Wtime();
+	BD_t = -MPI_Wtime();
 	do {
 		/* Time measurement *///cout << endl;
 		BD_jobCase = BD_newJobCase;
