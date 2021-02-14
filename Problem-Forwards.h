@@ -7,5 +7,4 @@ This source code is a part of BSF Skeleton (https://github.com/leonid-sokolinsky
 ==============================================================================*/
 #include "Problem-bsfTypes.h"	// Predefined BSF types
 #include "Problem-Types.h"		// Problem Types
-
-
+//====================== Problem Functions ===========================

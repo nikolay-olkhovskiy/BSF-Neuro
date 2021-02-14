@@ -3,7 +3,7 @@ Project: Bulk Synchronous Farm (BSF)
 Theme: BSF Skeleton
 Module: BSF-Data.h (Problem Independent Variables & Data Structures)
 Prefix: BD
-Author: Leonid B. Sokolinsky 
+Author: Leonid B. Sokolinsky !
 This source code is a part of BSF Skeleton (https://github.com/leonid-sokolinsky/BSF-skeleton)
 ==============================================================================*/
 #include "BSF-Include.h"			// Problem Independent "Include" Files
@@ -11,6 +11,12 @@ This source code is a part of BSF Skeleton (https://github.com/leonid-sokolinsky
 #include "Problem-bsfParameters.h"	// BSF-skeleton parameters
 // ========================= Constants ========================
 #define BD_EXIT	true			// End of Work
+//======================= Compatibility ==========================
+#ifndef PP_BSF_MAX_MPI_SIZE
+#ifdef PP_MAX_MPI_SIZE
+#define PP_BSF_MAX_MPI_SIZE PP_MAX_MPI_SIZE
+#endif // PP_MAX_MPI_SIZE
+#endif // PP_BSF_MAX_MPI_SIZE
 // ========================= Variables ========================
 static int	BD_elemsPerWorker;	// Number of elements per worker
 static bool BD_exit;			// Indicator of ending the calculations
@@ -37,7 +43,7 @@ static BT_extendedReduceElem_T_2*	BD_extendedReduceResult_P_2;
 static BT_extendedReduceElem_T_3*	BD_extendedReduceResult_P_3;
 static PT_bsf_mapElem_T*			BD_mapSubList;
 static BT_order_T					BD_order;		// Order for Workers
-static MPI_Status					BD_status[PP_MAX_MPI_SIZE];		// MPI ststus
-static MPI_Request					BD_request[PP_MAX_MPI_SIZE];	// MPI request
-static int							BD_sublistSize[PP_MAX_MPI_SIZE];// SubList Sizes for Workers
-static int							BD_offset[PP_MAX_MPI_SIZE];		// List offsets for Workers
+static MPI_Status					BD_status[PP_BSF_MAX_MPI_SIZE];		// MPI ststus
+static MPI_Request					BD_request[PP_BSF_MAX_MPI_SIZE];	// MPI request
+static int							BD_sublistSize[PP_BSF_MAX_MPI_SIZE];// SubList Sizes for Workers
+static int							BD_offset[PP_BSF_MAX_MPI_SIZE];		// List offsets for Workers

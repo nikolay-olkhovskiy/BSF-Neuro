@@ -8,7 +8,6 @@ This source code is a part of BSF Skeleton (https://github.com/leonid-sokolinsky
 ==============================================================================*/
 #pragma once
 #include "Problem-Types.h"		// Problem Types 
-
 //=========================== BSF Types =========================
 struct PT_bsf_parameter_T {		// Order parameters
 

@@ -97,6 +97,14 @@ void PC_bsf_ProcessResults_3(	// For Job 3
 	// Optional filling. Do not delete!
 }
 
+void PC_bsf_JobDispatcher(
+	PT_bsf_parameter_T* parameter, // Current Approximation
+	int* job,
+	bool* exit
+) {
+	// Optional filling. Do not delete!
+}
+
 void PC_bsf_ParametersOutput(PT_bsf_parameter_T parameter) {
 	cout << "=================================================== Problem parameters ====================================================" << endl;
 	cout << "Number of Workers: " << BSF_sv_numOfWorkers << endl;
