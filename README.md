@@ -6,6 +6,7 @@ BSF-Neuro includes next dependencies:
 - https://github.com/Dobiasd/FunctionalPlus
 - https://eigen.tuxfamily.org/index.php?title=Main_Page
 - https://github.com/nlohmann/json
+
 The dependencies header files should be place into some local 'include' directory. This directory should be added to compiler settings.
 The repository includes User manual (https://github.com/leonid-sokolinsky/BSF-skeleton/blob/master/User-manual.pdf) that explains in detail how to quickly create correct and efficient parallel programs for computing clusters using the BSF-skeleton.
 
