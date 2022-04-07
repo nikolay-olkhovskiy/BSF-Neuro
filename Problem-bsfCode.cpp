@@ -6,6 +6,7 @@ Prefix: PC
 Author: Leonid B. Sokolinsky
 This source code is a part of BSF Skeleton (https://github.com/leonid-sokolinsky/BSF-skeleton)
 ==============================================================================*/
+#include <fdeep/fdeep.hpp>
 #include "Problem-Data.h"			// Problem Types 
 #include "Problem-Forwards.h"		// Problem Function Forwards
 #include "Problem-bsfParameters.h"	// BSF-skeleton parameters
@@ -14,11 +15,21 @@ using namespace std;
 
 //----------------------- Predefined problem-dependent functions -----------------
 void PC_bsf_Init(bool* success) {
+	std::vector<float> test(121);
+	std::fill(test.begin(), test.end(), 1.);
+	std::cout << test.size() << std::endl;
+	std::copy(test.begin(), test.end(), std::ostream_iterator<int>(std::cout, " "));
 
+	const auto model = fdeep::load_model("fdeep_model.json");
+	const auto result = model.predict({
+		fdeep::tensor(fdeep::tensor_shape(static_cast<std::size_t>(121)),
+		std::vector<float>{test})
+	});
+	std::cout << fdeep::show_tensors(result) << std::endl;
 }
 
 void PC_bsf_SetListSize(int* listSize) {
-
+	*listSize = 100;
 }
 
 void PC_bsf_CopyParameter(PT_bsf_parameter_T parameterIn, PT_bsf_parameter_T* parameterOutP) {
