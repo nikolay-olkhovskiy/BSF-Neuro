@@ -37,8 +37,18 @@ int main(int argc, char* argv[]) {
 		exit(1);
 	};
 	
-	if (BD_rank == BD_masterRank)
+	if (BD_rank == BD_masterRank) {
+		BD_success = true;
+		PC_bsf_MasterInit(&BD_success);
+		MPI_Allreduce(&BD_success, &success, 1, MPI_UNSIGNED, MPI_LAND, MPI_COMM_WORLD);
+		if (!success) {
+			if (BD_rank == BD_masterRank)
+				cout << "Error: PC_bsf_MasterInit failed!" << endl;
+			MPI_Finalize();
+			exit(1);
+		};
 		BC_Master();
+	}
 	else 
 		BC_Worker();
 

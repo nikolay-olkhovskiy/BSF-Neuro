@@ -15,6 +15,10 @@ using namespace std;
 
 //----------------------- Predefined problem-dependent functions -----------------
 void PC_bsf_Init(bool* success) {
+
+}
+
+void PC_bsf_MasterInit(bool* success) {
 	std::vector<float> test(121);
 	std::fill(test.begin(), test.end(), 1.);
 	std::cout << test.size() << std::endl;
@@ -24,7 +28,7 @@ void PC_bsf_Init(bool* success) {
 	const auto result = model.predict({
 		fdeep::tensor(fdeep::tensor_shape(static_cast<std::size_t>(121)),
 		std::vector<float>{test})
-	});
+		});
 	std::cout << fdeep::show_tensors(result) << std::endl;
 }
 
