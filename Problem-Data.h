@@ -8,8 +8,36 @@ This source code is a part of BSF Skeleton (https://github.com/leonid-sokolinsky
 ==============================================================================*/
 #include "Problem-Types.h"			// Problem Parameters 
 #include <optional>
+using namespace std;
 //========================== Problem variables ====================================
-std::vector<float>				PD_InputLayer(121);
+static int						PD_n;			// Space dimension
+static int						PD_m;			// Number of inequalities
+static PT_input_layer			PD_InputLayer;
 std::optional<fdeep::model>		PD_DNN;
 
 //========================== Problem data structures ==============================
+static PT_matrix PD_A;	// Matrix of the system Ax <= b
+static PT_column PD_b;	// Column of the constant terms of the system Ax <= b
+static PT_vector PD_c;	// Coefficients of the objective function <c,x>
+static PT_matrix PD_E;	// Matrix of vectors e(i) forming basis othogonal to objective function
+static PT_vector PD_g;	// Point of retina
+static PT_vector PD_z;	// Center of retina
+
+//========================== Files ================================================
+static string PD_lppFile; /* LPP file in the following format:
+------------ begin of file -------------
+m n
+A_11 A_12 ... A_1n b_1
+A_21 A_22 ... A_2n b_2
+...
+A_m1 A_m2 ... A_mn b_m
+c_1 c_2 ... c_n
+------------ end of file----------------*/
+static string PD_outFile; /* OUT file in the following format:
+------------ begin of file -------------
+m
+I_1
+I_2
+...
+I_m
+------------ end of file----------------*/

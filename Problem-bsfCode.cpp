@@ -15,17 +15,85 @@ using namespace std;
 
 //----------------------- Predefined problem-dependent functions -----------------
 void PC_bsf_Init(bool* success) {
+	FILE* stream;
+	PT_float buf;
+	const char* lppFile;
 
+	srand((unsigned)time(NULL) * (BSF_sv_mpiRank + 10));
+	// ------------- Load LPP data -------------------
+
+	PD_lppFile = PP_PATH;
+	PD_lppFile += PP_LPP_FILE;
+	lppFile = PD_lppFile.c_str();
+	stream = fopen(lppFile, "r");
+	if (stream == NULL) {
+		if (BSF_sv_mpiRank == BSF_sv_mpiMaster)
+			cout << "Failure of opening file '" << lppFile << "'.\n";
+		*success = false;
+		return;
+	}
+
+	if (fscanf(stream, "%d%d", &PD_m, &PD_n) == 0) {
+		if (BSF_sv_mpiRank == BSF_sv_mpiMaster)
+			cout << "Unexpected end of file" << endl;
+		*success = false;
+		return;
+	}
+
+	if (PD_m > PP_MAX_M || PD_n != PP_N) {
+		if (BSF_sv_mpiRank == BSF_sv_mpiMaster) {
+			cout << "Wrong problem parameters!" << endl;
+			cout << "Number of inequalities: " << PD_m << " (max: " << PP_MAX_M << ")." << endl;
+			cout << "Number of dimensions: " << PD_n << " (correct: " << PP_N << ")." << endl;
+		}
+		*success = false;
+		return;
+	}
+
+	for (int i = 0; i < PD_m; i++) {
+		for (int j = 0; j < PD_n; j++) {
+			if (fscanf(stream, "%f", &buf) == 0) {
+				if (BSF_sv_mpiRank == BSF_sv_mpiMaster)
+					cout << "Unexpected end of file" << endl;
+				*success = false;
+				//				system("pause");
+				return;
+			}
+			PD_A[i][j] = buf;
+		}
+		if (fscanf(stream, "%f", &buf) == 0) {
+			if (BSF_sv_mpiRank == BSF_sv_mpiMaster)
+				cout << "Unexpected end of file" << endl;
+			*success = false;
+			//			system("pause");
+			return;
+		}
+		PD_b[i] = buf;
+	}
+
+	for (int j = 0; j < PD_n; j++) {
+		if (fscanf(stream, "%f", &buf) == 0) {
+			if (BSF_sv_mpiRank == BSF_sv_mpiMaster)
+				cout << "Unexpected end of file" << endl;
+			*success = false;
+			//			system("pause");
+			return;
+		}
+		PD_c[j] = buf;
+		PD_z[j] = buf + 1.;
+	}
+	fclose(stream);
 }
 
 void PC_bsf_MasterInit(bool* success) {
+	/*
 	std::fill(PD_InputLayer.begin(), PD_InputLayer.end(), 1.);
 	std::cout << PD_InputLayer.size() << std::endl;
 	std::copy(PD_InputLayer.begin(), PD_InputLayer.end(), std::ostream_iterator<int>(std::cout, " "));
 	std::cout << endl;
 
 	PD_DNN = fdeep::load_model("fdeep_model.json");
-	
+	*/
 }
 
 void PC_bsf_SetListSize(int* listSize) {
@@ -119,11 +187,21 @@ void PC_bsf_JobDispatcher(
 void PC_bsf_ParametersOutput(PT_bsf_parameter_T parameter) {
 	cout << "=================================================== Problem parameters ====================================================" << endl;
 	cout << "Number of Workers: " << BSF_sv_numOfWorkers << endl;
+	/*
 	const auto result = PD_DNN->predict({
 		fdeep::tensor(fdeep::tensor_shape(static_cast<std::size_t>(121)),
 		std::vector<float>{PD_InputLayer})
 	});
-	std::cout << fdeep::show_tensors(result) << std::endl;
+	std::cout << result.size() << std::endl;
+	std::cout << result[0].depth() << std::endl;
+	std::cout << result[0].rank() << std::endl;
+	std::cout << result[0].height() << std::endl;
+	std::cout << result[0].width() << std::endl;
+	
+	auto vec = result[0].to_vector();
+	for (auto val : vec) std::cout << val << " ";
+	cout << std::endl;
+	*/
 #ifdef PP_BSF_OMP
 #ifdef PP_BSF_NUM_THREADS
 	cout << "Number of Threads: " << PP_BSF_NUM_THREADS << endl;
@@ -203,3 +281,8 @@ void PC_bsfAssignParameter(PT_bsf_parameter_T parameter) { PC_bsf_CopyParameter(
 void PC_bsfAssignSublistLength(int value) { BSF_sv_sublistLength = value; }
 
 //----------------------------- User functions -----------------------------
+void DNN(PT_input_layer data, PT_vector direction) {
+	direction[0] = 0.;
+	direction[1] = 0.;
+	direction[2] = 1.;
+}
