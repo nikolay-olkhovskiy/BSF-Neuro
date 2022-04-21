@@ -19,17 +19,13 @@ void PC_bsf_Init(bool* success) {
 }
 
 void PC_bsf_MasterInit(bool* success) {
-	std::vector<float> test(121);
-	std::fill(test.begin(), test.end(), 1.);
-	std::cout << test.size() << std::endl;
-	std::copy(test.begin(), test.end(), std::ostream_iterator<int>(std::cout, " "));
+	std::fill(PD_InputLayer.begin(), PD_InputLayer.end(), 1.);
+	std::cout << PD_InputLayer.size() << std::endl;
+	std::copy(PD_InputLayer.begin(), PD_InputLayer.end(), std::ostream_iterator<int>(std::cout, " "));
+	std::cout << endl;
 
-	const auto model = fdeep::load_model("fdeep_model.json");
-	const auto result = model.predict({
-		fdeep::tensor(fdeep::tensor_shape(static_cast<std::size_t>(121)),
-		std::vector<float>{test})
-		});
-	std::cout << fdeep::show_tensors(result) << std::endl;
+	PD_DNN = fdeep::load_model("fdeep_model.json");
+	
 }
 
 void PC_bsf_SetListSize(int* listSize) {
@@ -79,7 +75,7 @@ void PC_bsf_ProcessResults(		// For Job 0
 	int* nextJob,
 	bool* exit 
 ) {
-
+	*exit = true;
 }
 
 void PC_bsf_ProcessResults_1(	// For Job 1	
@@ -123,6 +119,11 @@ void PC_bsf_JobDispatcher(
 void PC_bsf_ParametersOutput(PT_bsf_parameter_T parameter) {
 	cout << "=================================================== Problem parameters ====================================================" << endl;
 	cout << "Number of Workers: " << BSF_sv_numOfWorkers << endl;
+	const auto result = PD_DNN->predict({
+		fdeep::tensor(fdeep::tensor_shape(static_cast<std::size_t>(121)),
+		std::vector<float>{PD_InputLayer})
+	});
+	std::cout << fdeep::show_tensors(result) << std::endl;
 #ifdef PP_BSF_OMP
 #ifdef PP_BSF_NUM_THREADS
 	cout << "Number of Threads: " << PP_BSF_NUM_THREADS << endl;
@@ -132,7 +133,6 @@ void PC_bsf_ParametersOutput(PT_bsf_parameter_T parameter) {
 #else
 	cout << "OpenMP is turned off!" << endl;
 #endif // PP_BSF_OMP
-
 }
 
 void PC_bsf_IterOutput(PT_bsf_reduceElem_T* reduceResult, int reduceCounter, PT_bsf_parameter_T parameter,
