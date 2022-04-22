@@ -37,11 +37,8 @@ int main(int argc, char* argv[]) {
 		exit(1);
 	};
 	
-	if (BD_rank == BD_masterRank) {
-		BD_success = true;
-		PC_bsf_MasterInit(&BD_success);
+	if (BD_rank == BD_masterRank)
 		BC_Master();
-	}
 	else 
 		BC_Worker();
 

@@ -87,17 +87,17 @@ void PC_bsf_Init(bool* success) {
 	}
 	fclose(stream);
 	basis_Init();
-}
 
-void PC_bsf_MasterInit(bool* success) {
+	if (BSF_sv_mpiRank == BSF_sv_mpiMaster) {
 	/*
-	std::fill(PD_InputLayer.begin(), PD_InputLayer.end(), 1.);
-	std::cout << PD_InputLayer.size() << std::endl;
-	std::copy(PD_InputLayer.begin(), PD_InputLayer.end(), std::ostream_iterator<int>(std::cout, " "));
-	std::cout << endl;
+		std::fill(PD_InputLayer.begin(), PD_InputLayer.end(), 1.);
+		std::cout << PD_InputLayer.size() << std::endl;
+		std::copy(PD_InputLayer.begin(), PD_InputLayer.end(), std::ostream_iterator<int>(std::cout, " "));
+		std::cout << endl;
 
-	PD_DNN = fdeep::load_model("fdeep_model.json");
+		PD_DNN = fdeep::load_model("fdeep_model.json");
 	*/
+	}
 }
 
 void PC_bsf_SetListSize(int* listSize) {
