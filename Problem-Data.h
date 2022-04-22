@@ -12,6 +12,7 @@ using namespace std;
 //========================== Problem variables ====================================
 static int						PD_n;			// Space dimension
 static int						PD_m;			// Number of inequalities
+static int						PD_t;			// Current step
 static PT_input_layer			PD_I;			// Retina
 std::optional<fdeep::model>		PD_DNN;
 

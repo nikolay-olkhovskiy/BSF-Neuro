@@ -80,13 +80,15 @@ void PC_bsf_Init(bool* success) {
 			return;
 		}
 		PD_c[j] = buf;
-		
-		PD_z[0] = 200.;
-		PD_z[1] = 200.;
-		PD_z[2] = 0.;
 	}
 	fclose(stream);
 	basis_Init();
+
+	PD_z[0] = 200.;
+	PD_z[1] = 200.;
+	PD_z[2] = 0.;
+
+	PD_t = 0;
 
 	if (BSF_sv_mpiRank == BSF_sv_mpiMaster) {
 	/*
@@ -163,10 +165,47 @@ void PC_bsf_ProcessResults(		// For Job 0
 	int* nextJob,
 	bool* exit 
 ) {
+	FILE* stream;
+	const char* fileName;
+
 	PD_I[parameter->k] = reduceResult->objectiveDistance;
 	parameter->k += 1;
 
-	*exit = (parameter->k >= PP_K); // Possible overfilling!!! Needed type for superlong integers.
+	if (parameter->k >= PP_K) {
+		DNN(PD_I, PD_v);
+
+		//--------------- Output step results -----------------//
+		PD_outFile = PP_PATH;
+		PD_outFile += "step" + to_string(PD_t) + ".txt";
+		fileName = PD_outFile.c_str();
+		cout << "-----------------------------------" << endl;
+		stream = fopen(fileName, "w");
+		if (stream == NULL) {
+			cout << "Failure of opening file " << fileName << "!\n";
+			return;
+		}
+		fprintf(stream, "%d %d\n", PD_n, PP_K);
+		for (PT_integer i = 0; i < PD_n; i++) {
+			fprintf(stream, "%.4f\n", PD_z[i]);
+		}
+		for (PT_integer i = 0; i < PP_K; i++) {
+			fprintf(stream, "%.4f\n", PD_I[i]);
+		}
+		for (PT_integer i = 0; i < PD_n; i++) {
+			fprintf(stream, "%.4f\n", PD_v[i]);
+		}
+		fclose(stream);
+		cout << "Image is saved into file '" << fileName << "'." << endl;
+		cout << "-----------------------------------" << endl;
+		//--------------- End of step output -----------------//
+		
+		add_Vector(PD_z, PD_v);
+		parameter->k = 0;
+		copy_Vector(parameter->z, PD_z);
+		PD_t++;
+	}
+
+	*exit = (PD_t > 10); // Possible overfilling!!! Needed type for superlong integers.
 }
 
 void PC_bsf_ProcessResults_1(	// For Job 1	
