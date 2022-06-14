@@ -18,3 +18,4 @@ typedef PT_float				PT_vector[PP_N];
 typedef PT_vector				PT_matrix[PP_MAX_M];
 typedef PT_float				PT_column[PP_MAX_M];
 typedef PT_float				PT_image[PP_K];
+typedef PT_vector				PT_retina[PP_K];

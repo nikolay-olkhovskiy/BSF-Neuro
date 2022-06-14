@@ -13,8 +13,11 @@ using namespace std;
 static int						PD_n;			// Space dimension
 static int						PD_m;			// Number of inequalities
 static int						PD_t;			// Current step
-static PT_input_layer			PD_I;			// Retina
+static PT_input_layer			PD_I;			// Distances from retina points to objective projections
 std::optional<fdeep::model>		PD_DNN;
+static PT_vector				PD_base;		// Coordinate of base retina point
+static PT_retina				PD_field;		// Coordinates of base retina points
+static PT_retina				PD_retina;		// Coordinates of retina points
 
 //========================== Problem data structures ==============================
 static PT_matrix	PD_A;	// Matrix of the system Ax <= b

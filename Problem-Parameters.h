@@ -20,6 +20,7 @@ This source code is a part of BSF Skeleton (https://github.com/leonid-sokolinsky
 #define PP_LPP_FILE		"model_example.txt"
 #define PP_MODEL_FILE	"fdeep_model.json"
 #define PP_STEP_FILE	"step.txt"
+#define PP_RETINA_BASE	"base.ret"
 
 //-------------------------- Macroses ---------------------------
 #define PF_MIN(x,y) (x<y?x:y)

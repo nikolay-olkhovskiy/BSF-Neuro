@@ -22,7 +22,7 @@ inline PT_float vector_Sum(PT_vector v, int start);
 inline void basis_Print();
 
 // Helper functions for MapF implementation
-inline void G(PT_bsf_parameter_T parameter, PT_vector out);
+inline void G(PT_bsf_parameter_T parameter, PT_vector out, PT_vector base);
 inline bool isInnerPoint(PT_vector point);
 inline void targetProjection(int i, PT_vector _In, PT_vector _Out);
 inline PT_float objectiveDistance(PT_vector g);

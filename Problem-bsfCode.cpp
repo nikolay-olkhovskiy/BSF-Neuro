@@ -114,8 +114,10 @@ void PC_bsf_CopyParameter(PT_bsf_parameter_T parameterIn, PT_bsf_parameter_T* pa
 void PC_bsf_MapF(PT_bsf_mapElem_T* mapElem, PT_bsf_reduceElem_T* reduceElem, int* success) {	// For Job 0
 	PT_vector target;
 	int i = mapElem->inequalityNo;
-	G(BSF_sv_parameter, PD_g);
+	G(BSF_sv_parameter, PD_g, PD_base);
 	targetProjection(i, PD_g, target);
+	for (int j = 0; j < PP_N; j++) reduceElem->g[j] = PD_g[j];
+	for (int j = 0; j < PP_N; j++) reduceElem->base[j] = PD_base[j];
 	if (dotproduct_Vector(PD_A[i], PD_c) > 0 && isInnerPoint(target)) {
 		reduceElem->objectiveDistance = objectiveDistance(target);
 	}
@@ -169,6 +171,8 @@ void PC_bsf_ProcessResults(		// For Job 0
 	const char* fileName;
 
 	PD_I[parameter->k] = reduceResult->objectiveDistance;
+	copy_Vector(PD_retina[parameter->k], reduceResult->g);
+	copy_Vector(PD_field[parameter->k], reduceResult->base);
 	parameter->k += 1;
 
 	if (parameter->k >= PP_K) {
@@ -189,13 +193,16 @@ void PC_bsf_ProcessResults(		// For Job 0
 			fprintf(stream, "%.4f\n", PD_z[i]);
 		}
 		for (PT_integer i = 0; i < PP_K; i++) {
+			for (PT_integer j = 0; j < PD_n; j++) {
+				fprintf(stream, "%.4f ", PD_retina[i][j]);
+			}
 			fprintf(stream, "%.4f\n", PD_I[i]);
 		}
 		for (PT_integer i = 0; i < PD_n; i++) {
 			fprintf(stream, "%.4f\n", PD_v[i]);
 		}
 		fclose(stream);
-		cout << "Image is saved into file '" << fileName << "'." << endl;
+		cout << "Precedent is saved into file '" << fileName << "'." << endl;
 		cout << "-----------------------------------" << endl;
 		//--------------- End of step output -----------------//
 		
@@ -361,6 +368,30 @@ void PC_bsf_ProblemOutput(PT_bsf_reduceElem_T* reduceResult, int reduceCounter, 
 	fclose(stream);
 	cout << "Image is saved into file '" << fileName << "'." << endl;
 	cout << "-----------------------------------" << endl;
+
+#ifdef PP_RETINA_BASE
+	//--------------- Base retina output -----------------//
+	PD_outFile = PP_PATH;
+	PD_outFile += PP_RETINA_BASE;
+	fileName = PD_outFile.c_str();
+	cout << "-----------------------------------" << endl;
+	stream = fopen(fileName, "w");
+	if (stream == NULL) {
+		cout << "Failure of opening file " << fileName << "!\n";
+		return;
+	}
+	fprintf(stream, "%d %d\n", PD_n - 1, PP_K);
+	for (PT_integer i = 0; i < PP_K; i++) {
+		for (PT_integer j = 0; j < PD_n - 1; j++) {
+			fprintf(stream, "%.4f ", PD_field[i][j]);
+		}
+		fprintf(stream, "\n");
+	}
+	fclose(stream);
+	cout << "Base retina is saved into file '" << fileName << "'." << endl;
+	cout << "-----------------------------------" << endl;
+#endif
+
 }
 
 void PC_bsf_ProblemOutput_1(PT_bsf_reduceElem_T_1* reduceResult, int reduceCounter, PT_bsf_parameter_T parameter,
@@ -490,7 +521,7 @@ inline void basis_Print() {
 	}
 }
 
-inline void G(PT_bsf_parameter_T parameter, PT_vector out) {
+inline void G(PT_bsf_parameter_T parameter, PT_vector out, PT_vector base) {
 	PT_vector tempPoint;
 	PT_vector coordinate;
 	PT_integer dimensionPointsNumber;
@@ -507,6 +538,7 @@ inline void G(PT_bsf_parameter_T parameter, PT_vector out) {
 	for (int j = 1; j < PD_n; j++) {
 		copy_Vector(coordinate, PD_E[j]);
 		multiply_Vector(coordinate, (PT_float)(i[j - 1] * PP_DELTA - PP_ETA * PP_DELTA));
+		base[j - 1] = (PT_float)(i[j - 1] * PP_DELTA - PP_ETA * PP_DELTA);
 		add_Vector(tempPoint, coordinate);
 	}
 	for (int i = 0; i < PD_n; i++)
