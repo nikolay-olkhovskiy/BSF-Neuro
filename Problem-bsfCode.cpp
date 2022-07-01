@@ -16,7 +16,7 @@ using namespace std;
 //----------------------- Predefined problem-dependent functions -----------------
 void PC_bsf_Init(bool* success) {
 	std::vector<float> test(121);
-	std::fill(test.begin(), test.end(), 1.);
+	std::fill(test.begin(), test.end(), 9.99);
 	std::cout << test.size() << std::endl;
 	std::copy(test.begin(), test.end(), std::ostream_iterator<int>(std::cout, " "));
 
@@ -75,7 +75,7 @@ void PC_bsf_ProcessResults(		// For Job 0
 	int* nextJob,
 	bool* exit 
 ) {
-
+	*exit = true;
 }
 
 void PC_bsf_ProcessResults_1(	// For Job 1	
