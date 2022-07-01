@@ -8,4 +8,5 @@ This source code is a part of BSF Skeleton (https://github.com/leonid-sokolinsky
 #pragma once
 #include <iomanip>
 #include <iostream>
+#include <string>
 #include <omp.h>

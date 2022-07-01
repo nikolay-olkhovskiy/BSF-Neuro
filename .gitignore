@@ -19,6 +19,7 @@ Pursuit/
 *.ipynb
 
 # User-specific files
+step*
 *.rsuser
 *.suo
 *.user
