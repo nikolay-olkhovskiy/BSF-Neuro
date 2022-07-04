@@ -15,7 +15,7 @@ using namespace std;
 
 //----------------------- Predefined problem-dependent functions -----------------
 void PC_bsf_Init(bool* success) {
-<<<<<<< HEAD
+/*
 	std::vector<float> test(121);
 	std::fill(test.begin(), test.end(), 9.99);
 	std::cout << test.size() << std::endl;
@@ -27,7 +27,7 @@ void PC_bsf_Init(bool* success) {
 		std::vector<float>{test})
 	});
 	std::cout << fdeep::show_tensors(result) << std::endl;
-=======
+*/
 	FILE* stream;
 	PT_float buf;
 	const char* lppFile;
@@ -104,16 +104,13 @@ void PC_bsf_Init(bool* success) {
 	PD_t = 0;
 
 	if (BSF_sv_mpiRank == BSF_sv_mpiMaster) {
-	/*
 		std::fill(PD_InputLayer.begin(), PD_InputLayer.end(), 1.);
 		std::cout << PD_InputLayer.size() << std::endl;
 		std::copy(PD_InputLayer.begin(), PD_InputLayer.end(), std::ostream_iterator<int>(std::cout, " "));
 		std::cout << endl;
 
 		PD_DNN = fdeep::load_model("fdeep_model.json");
-	*/
 	}
->>>>>>> 1cc2d3dbab8393a76cbe4126bd674c3e02fbc7cc
 }
 
 void PC_bsf_SetListSize(int* listSize) {
@@ -185,9 +182,6 @@ void PC_bsf_ProcessResults(		// For Job 0
 	int* nextJob,
 	bool* exit 
 ) {
-<<<<<<< HEAD
-	*exit = true;
-=======
 	FILE* stream;
 	const char* fileName;
 
@@ -235,7 +229,6 @@ void PC_bsf_ProcessResults(		// For Job 0
 	}
 
 	*exit = (PD_t > 10); // Possible overfilling!!! Needed type for superlong integers.
->>>>>>> 1cc2d3dbab8393a76cbe4126bd674c3e02fbc7cc
 }
 
 void PC_bsf_ProcessResults_1(	// For Job 1	
@@ -454,9 +447,19 @@ void PC_bsfAssignSublistLength(int value) { BSF_sv_sublistLength = value; }
 
 //----------------------------- User functions -----------------------------
 void DNN(PT_input_layer data, PT_vector direction) {
-	direction[0] = 0.;
-	direction[1] = 0.;
-	direction[2] = 10.;
+	std::vector<float> vec(PP_N);
+	//std::vector<float> input_vector(data, data + PP_K);
+	const auto result = PD_DNN.value().predict({
+	fdeep::tensor(fdeep::tensor_shape(static_cast<std::size_t>(121)),
+		std::vector<float>(data, data + PP_K))
+		});
+	vec = result.data()->to_vector();
+	std::copy(vec.begin(), vec.end(), std::ostream_iterator<float>(std::cout, " "));
+	std::cout << std::endl;
+
+	direction[0] = 10. * vec[0];
+	direction[1] = 10. * vec[1];
+	direction[2] = 10. * vec[2];
 }
 inline void basis_Init() {
 	//PD_c
