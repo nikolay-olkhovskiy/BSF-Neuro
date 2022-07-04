@@ -122,7 +122,10 @@ void PC_bsf_SetListSize(int* listSize) {
 
 void PC_bsf_CopyParameter(PT_bsf_parameter_T parameterIn, PT_bsf_parameter_T* parameterOutP) {
 	parameterOutP->k = parameterIn.k;
-	for (int i = 0; i < PD_n; i++) parameterOutP->z[i] = parameterIn.z[i];
+	for (int i = 0; i < PD_n; i++) {
+		parameterOutP->z[i] = parameterIn.z[i];
+		PD_z[i] = parameterIn.z[i];
+	}
 }
 
 void PC_bsf_MapF(PT_bsf_mapElem_T* mapElem, PT_bsf_reduceElem_T* reduceElem, int* success) {	// For Job 0
@@ -130,6 +133,7 @@ void PC_bsf_MapF(PT_bsf_mapElem_T* mapElem, PT_bsf_reduceElem_T* reduceElem, int
 	int i = mapElem->inequalityNo;
 	G(BSF_sv_parameter, PD_g, PD_base);
 	targetProjection(i, PD_g, target);
+
 	for (int j = 0; j < PP_N; j++) reduceElem->g[j] = PD_g[j];
 	for (int j = 0; j < PP_N; j++) reduceElem->base[j] = PD_base[j];
 	if (dotproduct_Vector(PD_A[i], PD_c) > 0 && isInnerPoint(target)) {
@@ -226,6 +230,7 @@ void PC_bsf_ProcessResults(		// For Job 0
 		add_Vector(PD_z, PD_v);
 		parameter->k = 0;
 		copy_Vector(parameter->z, PD_z);
+
 		PD_t++;
 	}
 
@@ -590,6 +595,5 @@ inline PT_float objectiveDistance(PT_vector x) {
 	//------------ Computing target distance rho_c -------------//
 	copy_Vector(temp, PD_z);
 	subtract_Vector(temp, x);
-
 	return (PT_float)(dotproduct_Vector(PD_c, temp) / sqrt(dotproduct_Vector(PD_c, PD_c)));
 }
